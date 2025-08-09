@@ -1,18 +1,35 @@
+.sub-main {
+  padding: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.sub-header {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+
 .sub-list {
   list-style: none;
-  max-width: 80vw;
-  margin: 2rem auto;
   padding: 0;
   display: flex;
   flex-direction: column;
-  row-gap: 1.5rem;
+  row-gap: 1rem;
+}
+
+.sub-item-price-div {
+  justify-items: end;
+}
+
+.sub-item-price {
+  font-weight: 700;
 }
 
 .sub-card {
   display: grid;
-  grid-template-columns: 175px 0.4fr 0.6fr 100px 150px;
+  grid-template-columns: 80px 1fr 100px 150px;
   align-items: center;
-  padding: 1rem;
+  padding: 0.75rem;
   border-radius: 8px;
   background-color: #444;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -25,26 +42,20 @@
   background-color: #666;
 }
 
-.sub-item-img, .sub-item-info, .sub-item-price, .sub-item-service, .cart-button {
-  padding: 0.5rem;
-  min-width: 24px;
-  align-self: center;
-}
-
 .sub-item-img {
-  object-fit: contain;
-  height: 150px;
-  max-width: 150px;
-  display: block;
-  margin: 0 auto;
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 6;
 }
 
-.sub-item-info, .sub-item-price {
-  text-align: center;
+.sub-item-info {
+  color: #aaa;
+  font-size: 0.9rem;
+  margin-top: 2;
 }
 
 .sub-item-service {
-  text-align: center;
   font-weight: 700;
 }
 

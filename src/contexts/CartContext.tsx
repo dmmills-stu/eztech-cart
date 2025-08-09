@@ -20,7 +20,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  const addToCart = (item: SubscriptionItem) => {
+  const addToCart = (item: SubscriptionItem | CartItem) => {
     let showToast: (() => void) | undefined;
 
     setCart((prevCart) => {
@@ -65,16 +65,30 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if (showToast) showToast();
   };
 
-    const removeFromCart = (id: number) => {
-      setCart((prevCart) => prevCart.filter((c) => c.id !== id));
-    };
+  const removeFromCart = (id: number) => {
+    setCart((prevCart) => prevCart.filter((c) => c.id !== id));
+  };
 
-    return (
-      <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
-        {children}
-      </CartContext.Provider>
+  const decrementFromCart = (id: number) => {
+    setCart((prevCart) =>
+      prevCart
+        .map((c) =>
+          c.id === id ? { ...c, amount: c.amount - 1 } : c
+        )
+        .filter((c) => c.amount > 0)
     );
   };
+
+  const clearCart = () => {
+    setCart([]);
+  };
+
+  return (
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, decrementFromCart, clearCart }}>
+      {children}
+    </CartContext.Provider>
+  );
+};
 
 export const useCart = () => {
   const context = useContext(CartContext);

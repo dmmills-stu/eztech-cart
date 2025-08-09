@@ -1,44 +1,16 @@
 'use client';
 
 import '../../styles/CartPage.css';
-import React, { useEffect, useState } from 'react';
-import { CartItem } from '@/types/CartItem';
+import { useCart } from '@/contexts/CartContext';
+import { FaArrowUp, FaArrowDown } from "react-icons/fa";
 
 const CART_KEY = 'cart';
 
 export default function CartPage() {
-  const [cart, setCart] = useState<CartItem[]>([]);
+  const { cart, addToCart, removeFromCart, decrementFromCart, clearCart } = useCart();
 
-  // Load cart from localStorage on client mount
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem(CART_KEY);
-      if (stored) {
-        setCart(JSON.parse(stored));
-      }
-    } catch (err) {
-      console.error('Failed to parse cart from localStorage', err);
-    }
-  }, []);
-
-  // Helper: compute total
+  // Compute total price
   const total = cart.reduce((sum, item) => sum + item.price * (item.amount ?? 1), 0);
-
-  // Remove single item (optional helper)
-  const removeItem = (id: number) => {
-    const updated = cart.filter((c) => c.id !== id);
-    setCart(updated);
-    localStorage.setItem(CART_KEY, JSON.stringify(updated));
-  };
-
-  // Clear everything from UI and localStorage
-  const clearCart = () => {
-    if (!cart.length) return;
-    const ok = confirm('Are you sure you want to clear your cart? This cannot be undone.');
-    if (!ok) return;
-    localStorage.removeItem(CART_KEY);
-    setCart([]);
-  };
 
   return (
     <main className="cart-main">
@@ -65,11 +37,21 @@ export default function CartPage() {
                 </div>
 
                 <div className="right-div">
-                  <div className="cart-qty">Qty: {item.amount ?? 1}</div>
-                  <div className="cart-price">${(item.price * (item.amount ?? 1)).toFixed(2)}</div>
-                  <button onClick={() => removeItem(item.id)} className="cart-remove-button">
-                    Remove
-                  </button>
+                  <div className="cart-text">
+                    <div className="cart-qty">Qty: {item.amount ?? 1}</div>
+                    <div className="cart-price">${(item.price * (item.amount ?? 1)).toFixed(2)}</div>
+                  </div>
+                  <div className="cart-buttons">
+                    <button onClick={() => addToCart(item)} className="cart-add-button">
+                      <FaArrowUp />
+                    </button>
+                    <button onClick={() => decrementFromCart(item.id)} className="cart-dec-button">
+                      <FaArrowDown />
+                    </button>
+                    <button onClick={() => removeFromCart(item.id)} className="cart-remove-button">
+                      Remove
+                    </button>
+                  </div>
                 </div>
               </li>
             ))}
@@ -78,7 +60,11 @@ export default function CartPage() {
           <div className="cart-footer">
             <div className="cart-total">Total: ${total.toFixed(2)}</div>
             <div>
-              <button onClick={clearCart} className="cart-clear-button" disabled={cart.length === 0}>
+              <button onClick={() => {
+                const ok = confirm('Are you sure you want to clear your cart? This cannot be undone.');
+                if(!ok) return;
+                clearCart();
+                }} className="cart-clear-button" disabled={cart.length === 0}>
                 Clear Cart
               </button>
             </div>
