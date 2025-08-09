@@ -2,8 +2,9 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { FaHome, FaShoppingCart } from 'react-icons/fa';
+import { FaHome, FaShoppingCart, FaSearch, FaInfo, FaList } from 'react-icons/fa';
 import { MdMovie } from "react-icons/md";
+import { CgProfile } from "react-icons/cg";
 import { useCart } from "@/contexts/CartContext";
 import '@/styles/NavBar.css';
 
@@ -40,6 +41,20 @@ const NavBar = () => {
         </li>
         <div className="inside-spacer" />
         <li>
+          <Link href="/watchlist">
+            <FaList className="nav-bar-icon" />
+            <span>Watch List</span>
+          </Link>
+        </li>
+        <div className="inside-spacer" />
+        <li>
+          <Link href="/search">
+            <FaSearch className="nav-bar-icon" />
+            <span>Search</span>
+          </Link>
+        </li>
+        <div className="inside-spacer" />
+        <li>
           <Link href="/subs">
             <MdMovie className="nav-bar-icon" />
             <span>Subscriptions</span>
@@ -52,7 +67,21 @@ const NavBar = () => {
             <span>Cart ({totalItems})</span>
           </Link>
         </li>
+        <div className="inside-spacer" />
+        <li>
+          <Link href="/about">
+            <FaInfo className="nav-bar-icon" />
+            <span>About Us</span>
+          </Link>
+        </li>
         <div className="outside-spacer" />
+        <div className="div-right">
+          <li>
+            <Link href="/profile">
+              <CgProfile className="profile-icon" />
+            </Link>
+          </li>
+        </div>
       </ul>
     </nav>
   );

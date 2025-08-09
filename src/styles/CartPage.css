@@ -110,7 +110,7 @@
   font-weight: 700;
 }
 
-.cart-clear-button, .cart-remove-button {
+.cart-clear-button, .cart-remove-button, .cart-checkout-button {
   width: max-content;
   align-self: center;
   justify-self: center;
@@ -129,16 +129,13 @@
   margin-top: 0.25rem;
 }
 
-.cart-clear-button {
+.cart-clear-button, .cart-checkout-button {
+  font-size: 18px;
   margin-right: 1rem;
 }
 
-.cart-clear-button:hover, .cart-remove-button:hover, .cart-add-button:hover, .cart-dec-button:hover {
+.cart-clear-button:hover, .cart-remove-button:hover, .cart-add-button:hover, .cart-dec-button:hover, .cart-checkout-button:hover {
     background-color: #991b1b;
-}
-
-.cart-clear-button {
-  font-size: 18px;
 }
 
 .cart-add-button, .cart-dec-button {

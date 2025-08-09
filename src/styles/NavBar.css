@@ -43,6 +43,10 @@
   flex-basis: auto;
 }
 
+.div-right a {
+  margin-right: 0.5rem;
+}
+
 .outside-spacer, .inside-spacer, .logo-spacer {
   flex-shrink: 1;
   flex-basis: 0;
@@ -60,7 +64,7 @@
   flex-grow: 1;
 }
 
-.nav-list li a:hover, .nav-left a:hover {
+.nav-list li a:hover, .nav-left a:hover, .nav-right a:hover {
   background-color: #444;
   color: #fff;
 }
@@ -84,4 +88,14 @@
 
 .nav-left a:hover .eztech-movies-logo g {
   fill: #ccc;
+}
+
+.profile-icon {
+  object-fit: contain;
+  height: 32px;
+  width: 32px;
+}
+
+.nav-list li {
+  align-self: center;
 }

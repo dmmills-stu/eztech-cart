@@ -3,6 +3,7 @@
 import '../../styles/CartPage.css';
 import { useCart } from '@/contexts/CartContext';
 import { FaArrowUp, FaArrowDown } from "react-icons/fa";
+import toast from "react-hot-toast";
 
 const CART_KEY = 'cart';
 
@@ -59,13 +60,22 @@ export default function CartPage() {
 
           <div className="cart-footer">
             <div className="cart-total">Total: ${total.toFixed(2)}</div>
-            <div>
+            <div className="cart-footer-buttons">
               <button onClick={() => {
                 const ok = confirm('Are you sure you want to clear your cart? This cannot be undone.');
                 if(!ok) return;
                 clearCart();
                 }} className="cart-clear-button" disabled={cart.length === 0}>
                 Clear Cart
+              </button>
+              <button onClick={(e) => {
+                e.preventDefault();
+                toast("This functionality has not been implemented yet.", {
+                  duration: 3000,
+                  style: { background: "#444", color: "#fff" },
+                });
+              }} className="cart-checkout-button" disabled={cart.length === 0}>
+                Checkout
               </button>
             </div>
           </div>
