@@ -1,5 +1,6 @@
 'use client';
 
+import '../../styles/CartPage.css';
 import React, { useEffect, useState } from 'react';
 import { CartItem } from '@/types/CartItem';
 
@@ -40,33 +41,33 @@ export default function CartPage() {
   };
 
   return (
-    <main style={styles.main}>
-      <h1 style={styles.h1}>Your Cart</h1>
+    <main className="cart-main">
+      <h1 className="cart-header">Your Cart</h1>
 
       {cart.length === 0 ? (
-        <p style={styles.empty}>Your cart is empty.</p>
+        <p className="empty-list">Your cart is empty.</p>
       ) : (
         <>
-          <ul style={styles.list}>
+          <ul className="cart-list">
             {cart.map((item) => (
-              <li key={item.id} style={styles.item}>
-                <div style={styles.left}>
+              <li key={item.id} className="cart-item">
+                <div className="left-div">
                   {item.img ? (
-                    <img src={item.img} alt={item.service} style={styles.thumb} />
+                    <img src={item.img} alt={item.service} className="item-thumb" />
                   ) : (
-                    <div style={styles.thumbPlaceholder} />
+                    <div className="item-thumb-placeholder" />
                   )}
                 </div>
 
-                <div style={styles.mid}>
-                  <div style={styles.title}>{item.service}</div>
-                  {item.serviceInfo && <div style={styles.info}>{item.serviceInfo}</div>}
+                <div className="cart-mid">
+                  <div className="cart-title">{item.service}</div>
+                  {item.serviceInfo && <div className="cart-info">{item.serviceInfo}</div>}
                 </div>
 
-                <div style={styles.right}>
-                  <div style={styles.qty}>Qty: {item.amount ?? 1}</div>
-                  <div style={styles.price}>${(item.price * (item.amount ?? 1)).toFixed(2)}</div>
-                  <button onClick={() => removeItem(item.id)} style={styles.removeBtn}>
+                <div className="right-div">
+                  <div className="cart-qty">Qty: {item.amount ?? 1}</div>
+                  <div className="cart-price">${(item.price * (item.amount ?? 1)).toFixed(2)}</div>
+                  <button onClick={() => removeItem(item.id)} className="cart-remove-button">
                     Remove
                   </button>
                 </div>
@@ -74,10 +75,10 @@ export default function CartPage() {
             ))}
           </ul>
 
-          <div style={styles.footer}>
-            <div style={styles.total}>Total: ${total.toFixed(2)}</div>
+          <div className="cart-footer">
+            <div className="cart-total">Total: ${total.toFixed(2)}</div>
             <div>
-              <button onClick={clearCart} style={styles.clearBtn} disabled={cart.length === 0}>
+              <button onClick={clearCart} className="cart-clear-button" disabled={cart.length === 0}>
                 Clear Cart
               </button>
             </div>
@@ -86,58 +87,4 @@ export default function CartPage() {
       )}
     </main>
   );
-}
-
-// Inline minimal styles — replace with your CSS as desired
-const styles: { [k: string]: React.CSSProperties } = {
-  main: {
-    padding: '1.5rem',
-    maxWidth: '900px',
-    margin: '0 auto',
-  },
-  h1: { fontSize: '1.75rem', marginBottom: '1rem' },
-  empty: { color: '#666' },
-  list: { listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: '1rem' },
-  item: {
-    display: 'grid',
-    gridTemplateColumns: '80px 1fr 160px',
-    gap: '1rem',
-    alignItems: 'center',
-    padding: '0.75rem',
-    borderRadius: '8px',
-    background: '#fafafa',
-    border: '1px solid #eee',
-  },
-  left: { display: 'flex', alignItems: 'center', justifyContent: 'center' },
-  thumb: { width: '64px', height: '64px', objectFit: 'cover', borderRadius: 6 },
-  thumbPlaceholder: { width: 64, height: 64, background: '#eaeaea', borderRadius: 6 },
-  mid: { display: 'flex', flexDirection: 'column' },
-  title: { fontWeight: 600 },
-  info: { color: '#666', fontSize: '0.9rem', marginTop: 2 },
-  right: { display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 6 },
-  qty: { fontSize: '0.9rem' },
-  price: { fontWeight: 700 },
-  removeBtn: {
-    marginTop: 6,
-    background: '#fff',
-    border: '1px solid #ccc',
-    padding: '0.25rem 0.5rem',
-    borderRadius: 6,
-    cursor: 'pointer',
-  },
-  footer: {
-    marginTop: '1.25rem',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  total: { fontSize: '1.1rem', fontWeight: 700 },
-  clearBtn: {
-    background: '#b91c1c',
-    color: '#fff',
-    border: 'none',
-    padding: '0.5rem 0.75rem',
-    borderRadius: 6,
-    cursor: 'pointer',
-  },
 };

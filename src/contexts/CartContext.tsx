@@ -9,7 +9,7 @@ import toast from 'react-hot-toast';
 const CartContext = createContext<CartContextItem | undefined>(undefined);
 
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [cart, setCart] = useState<SubscriptionItem[]>([]);
+  const [cart, setCart] = useState<CartItem[]>([]);
 
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
