@@ -90,10 +90,14 @@
   fill: #ccc;
 }
 
-.profile-icon {
+.profile-icon, .profile-pic {
   object-fit: contain;
   height: 32px;
   width: 32px;
+}
+
+.profile-pic {
+  border-radius: 50%;
 }
 
 .nav-list li {

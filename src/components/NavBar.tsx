@@ -7,10 +7,12 @@ import { MdMovie } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { useCart } from "@/contexts/CartContext";
 import '@/styles/NavBar.css';
+import { useSession } from "next-auth/react";
 
 const NavBar = () => {
   const { cart } = useCart();
   const totalItems = cart.reduce((sum, item) => sum + item.amount, 0);
+  const { data: session } = useSession();
 
   return (
     <nav className="nav-bar">
@@ -78,7 +80,11 @@ const NavBar = () => {
         <div className="div-right">
           <li>
             <Link href="/profile">
-              <CgProfile className="profile-icon" />
+              {session?.user?.image ? (
+                <img src={session.user.image} alt="Profile" className="profile-pic" />
+              ) : (
+                <CgProfile className="profile-icon" />
+              )}
             </Link>
           </li>
         </div>

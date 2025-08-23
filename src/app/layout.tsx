@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import NavBar from "@/components/NavBar"
+import NavBar from "@/components/NavBar";
+import SessionProviderWrapper from "@/components/SessionProviderWrapper";
 import { CartProvider } from "@/contexts/CartContext";
 import { Toaster } from 'react-hot-toast';
 
@@ -17,13 +18,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <CartProvider>
-          <div className="app-container">
-            <NavBar />
-            <main className="main-content">{children}</main>
-            <Toaster position="top-left" reverseOrder={false} />
-          </div>
-        </CartProvider>
+        <SessionProviderWrapper>
+          <CartProvider>
+            <div className="app-container">
+              <NavBar />
+              <main className="main-content">{children}</main>
+              <Toaster position="top-left" reverseOrder={false} />
+            </div>
+          </CartProvider>
+        </SessionProviderWrapper>
       </body>
     </html>
   );
